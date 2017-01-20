@@ -12,6 +12,11 @@ public class Arithmetic {
         System.out.println(subtract(number1, number2));
         System.out.println(multiply(number1, number2));
         System.out.println(divide(number1, number2));
+        System.out.println(modulus(number1, number2));
+    }
+
+    private static double modulus(double number1, double number2) {
+        return number1 % number2;
     }
 
     private static double divide(double number1, double number2) {
