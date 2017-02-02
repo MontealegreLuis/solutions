@@ -30,10 +30,16 @@ public class StudentsInformation {
 
     private static String anotherStudent(Scanner input, PrintStream output) {
         String anotherStudent;
-        do {
+        try {
             output.println("Do you want to continue? (y/n)");
             anotherStudent = input.next();
-        } while (!"y".equalsIgnoreCase(anotherStudent) && !"n".equalsIgnoreCase(anotherStudent));
+            if (!"y".equalsIgnoreCase(anotherStudent)
+                && !"n".equalsIgnoreCase(anotherStudent)) {
+                throw new IllegalArgumentException();
+            }
+        } catch (IllegalArgumentException e) {
+            return anotherStudent(input, output);
+        }
         return anotherStudent;
     }
 
@@ -59,7 +65,7 @@ public class StudentsInformation {
         String studentName = student[0];
         String information;
 
-        do {
+        try {
             output.printf(
                 "Student %d is %s. What would you like to know about %s? (Hometown or favorite food)%n",
                 studentNumber,
@@ -67,8 +73,13 @@ public class StudentsInformation {
                 studentName
             );
             information = input.next();
-        } while (!information.equalsIgnoreCase("hometown")
-            && !information.equalsIgnoreCase("favorite food"));
+            if (!information.equalsIgnoreCase("hometown")
+                && !information.equalsIgnoreCase("favorite food")) {
+                throw new IllegalArgumentException();
+            }
+        } catch (IllegalArgumentException e) {
+            return chooseInformationToShow(input, output, student, studentNumber);
+        }
 
         return information;
     }
@@ -79,11 +90,16 @@ public class StudentsInformation {
         String[][] students
     ) {
         int studentNumber;
-        do {
+        try {
             output.println("Which student would you like to learn more about?");
-            output.println("Enter a number between 1 and " +  students.length);
+            output.println("Enter a number between 1 and " + students.length);
             studentNumber = input.nextInt();
-        } while (1 > studentNumber || studentNumber > students.length );
+            if (1 > studentNumber || studentNumber > students.length) {
+                throw new IndexOutOfBoundsException();
+            }
+        } catch (IndexOutOfBoundsException e) {
+            return chooseStudent(output, input, students);
+        }
         return studentNumber;
     }
 
