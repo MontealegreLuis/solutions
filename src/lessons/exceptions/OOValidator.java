@@ -18,12 +18,13 @@ public class OOValidator {
     public int getInt(String prompt) {
         int number;
 
-        output.println(prompt);
+        output.print(prompt);
         String numeric = input.next();
 
         try {
             number = Integer.parseInt(numeric);
         } catch (NumberFormatException e) {
+            output.println("Error! Invalid integer value. Try again.");
             return getInt(prompt);
         }
 
@@ -32,21 +33,27 @@ public class OOValidator {
 
     public int getIntWithinRange(String prompt, int min, int max) {
         int number = getInt(prompt);
-        if (min > number || number > max) {
+        if (number < min) {
+            output.println("Error! Number must be greater than " + number);
             return getIntWithinRange(prompt, min, max);
         }
-        return input.nextInt();
+        if (number > max) {
+            output.println("Error! Number must be less than " + number);
+            return getIntWithinRange(prompt, min, max);
+        }
+        return number;
     }
 
     public double getDouble(String prompt) {
         double number;
 
-        output.println(prompt);
+        output.print(prompt);
         String numeric = input.next();
 
         try {
             number = Double.parseDouble(numeric);
         } catch (NumberFormatException e) {
+            output.println("Error! Invalid decimal value. Try again.");
             return getDouble(prompt);
         }
 
@@ -54,10 +61,15 @@ public class OOValidator {
     }
 
     public double getDoubleWithinRange(String prompt, double min, double max) {
-        output.println(prompt);
         double number = getDouble(prompt);
 
-        if (min > number || number > max) {
+        if (number < min) {
+            output.println("Error! Number must be greater than " + number);
+            return getDoubleWithinRange(prompt, min, max);
+        }
+
+        if (number > max) {
+            output.println("Error! Number must be less than " + number);
             return getDoubleWithinRange(prompt, min, max);
         }
 
