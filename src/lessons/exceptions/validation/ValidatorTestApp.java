@@ -1,7 +1,7 @@
 /**
  * This source file is subject to the license that is bundled with this package in the file LICENSE.
  */
-package lessons.exceptions;
+package lessons.exceptions.validation;
 
 import java.io.PrintStream;
 import java.util.Scanner;
