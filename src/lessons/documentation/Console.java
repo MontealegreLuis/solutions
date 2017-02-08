@@ -3,18 +3,39 @@
  */
 package lessons.documentation;
 
+import java.io.PrintStream;
+import java.util.Scanner;
+
 public class Console {
-    public void print(String s) {
+    private final Scanner input;
+    private final PrintStream output;
+
+    public Console(Scanner input, PrintStream output) {
+        this.input = input;
+        this.output = output;
     }
 
-    public void println(String s) {
+    public void print(String message) {
+        output.print(message);
+    }
+
+    public void println(String message) {
+        output.println(message);
     }
 
     public void println() {
+        output.println();
     }
 
     public String getRequiredString(String prompt) {
-        return null;
+        output.println(prompt);
+        String required = input.next();
+
+        if (required.trim().isEmpty()) {
+            return getRequiredString(prompt);
+        }
+
+        return required;
     }
 
     public String getChoiceString(String prompt, String s1, String s2) {
