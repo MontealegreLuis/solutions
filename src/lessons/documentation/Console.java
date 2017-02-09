@@ -38,8 +38,15 @@ public class Console {
         return required;
     }
 
-    public String getChoiceString(String prompt, String s1, String s2) {
-        return null;
+    public String getChoiceString(String prompt, String option1, String option2) {
+        output.println(prompt);
+        String option = input.next();
+
+        if (!option1.equalsIgnoreCase(option) && !option2.equalsIgnoreCase(option)) {
+            return getChoiceString(prompt, option1, option2);
+        }
+
+        return option;
     }
 
     public int getInt(String prompt) {
