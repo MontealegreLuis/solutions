@@ -50,7 +50,17 @@ public class Console {
     }
 
     public int getInt(String prompt) {
-        return 0;
+        output.println(prompt);
+        int number;
+
+        try {
+            String numeric = input.next();
+            number = Integer.parseInt(numeric);
+        } catch (NumberFormatException e) {
+            return getInt(prompt);
+        }
+
+        return number;
     }
 
     public int getIntWithinRange(String prompt, int min, int max) {
