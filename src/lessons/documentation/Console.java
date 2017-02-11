@@ -64,7 +64,11 @@ public class Console {
     }
 
     public int getIntWithinRange(String prompt, int min, int max) {
-        return 0;
+        int number;
+        do {
+            number = getInt(prompt);
+        } while (min > number || number > max);
+        return number;
     }
 
     public double getDouble(String prompt) {
